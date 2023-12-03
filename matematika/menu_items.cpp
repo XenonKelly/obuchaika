@@ -1,67 +1,64 @@
-#include <cstddef>
+п»ї#include <cstddef>
 
 #include "menu_items.hpp"
 #include "menu_functions.hpp"
 
 
-const KLikhosherstova::MenuItem KLikhosherstova::STUDY_SUMM = {
-    "1 - Хочу научиться складывать!", KLikhosherstova::study_summ, &KLikhosherstova::STUDY_ALGEBRA
+const KLikhosherstova::MenuItem KLikhosherstova::ALGEBRA_SUMM = {
+    "1 - РҐРѕС‡Сѓ РЅР°СѓС‡РёС‚СЊСЃСЏ СЃРєР»Р°РґС‹РІР°С‚СЊ!", KLikhosherstova::algebra_summ, &KLikhosherstova::STUDY_ALGEBRA
 };
-const KLikhosherstova::MenuItem KLikhosherstova::STUDY_SUBSTRACT = {
-    "2 - Хочу научиться вычитать!", KLikhosherstova::study_substract, &KLikhosherstova::STUDY_ALGEBRA
+const KLikhosherstova::MenuItem KLikhosherstova::ALGEBRA_SUBSTRACT = {
+    "2 - РҐРѕС‡Сѓ РЅР°СѓС‡РёС‚СЊСЃСЏ РІС‹С‡РёС‚Р°С‚СЊ!", KLikhosherstova::algebra_substract, &KLikhosherstova::STUDY_ALGEBRA
 };
-const KLikhosherstova::MenuItem KLikhosherstova::STUDY_MULTIPLY = {
-    "3 - Хочу научиться умножать!", KLikhosherstova::study_multiply, &KLikhosherstova::STUDY_ALGEBRA
+const KLikhosherstova::MenuItem KLikhosherstova::ALGEBRA_MULTIPLY = {
+    "3 - РҐРѕС‡Сѓ РЅР°СѓС‡РёС‚СЊСЃСЏ СѓРјРЅРѕР¶Р°С‚СЊ!", KLikhosherstova::algebra_multiply, &KLikhosherstova::STUDY_ALGEBRA
 };
-const KLikhosherstova::MenuItem KLikhosherstova::STUDY_DIVIDE = {
-    "4 - Хочу научиться делить!", KLikhosherstova::study_divide, &KLikhosherstova::STUDY_ALGEBRA
+const KLikhosherstova::MenuItem KLikhosherstova::ALGEBRA_DIVIDE = {
+    "4 - РҐРѕС‡Сѓ РЅР°СѓС‡РёС‚СЊСЃСЏ РґРµР»РёС‚СЊ!", KLikhosherstova::algebra_divide, &KLikhosherstova::STUDY_ALGEBRA
 };
-const KLikhosherstova::MenuItem KLikhosherstova::GO_BACK_FROM_ALGEBRA = {
-    "0 - Вернуться к выбору предметов", KLikhosherstova::go_back, &KLikhosherstova::STUDY_ALGEBRA
+const KLikhosherstova::MenuItem KLikhosherstova::ALGEBRA_GO_BACK = {
+    "0 - Р’РµСЂРЅСѓС‚СЊСЃСЏ Рє РІС‹Р±РѕСЂСѓ РїСЂРµРґРјРµС‚РѕРІ", KLikhosherstova::go_back, &KLikhosherstova::STUDY_ALGEBRA
 };
-
 
 namespace {
     const KLikhosherstova::MenuItem* const study_children_from_algebra[] = {
-        &KLikhosherstova::GO_BACK_FROM_ALGEBRA,
-        &KLikhosherstova::STUDY_SUMM,
-        &KLikhosherstova::STUDY_SUBSTRACT,
-        &KLikhosherstova::STUDY_MULTIPLY,
-        &KLikhosherstova::STUDY_DIVIDE
+        &KLikhosherstova::ALGEBRA_GO_BACK,
+        &KLikhosherstova::ALGEBRA_SUMM,
+        &KLikhosherstova::ALGEBRA_SUBSTRACT,
+        &KLikhosherstova::ALGEBRA_MULTIPLY,
+        &KLikhosherstova::ALGEBRA_DIVIDE
     };
     const int study_children_from_algebra_size = sizeof(study_children_from_algebra) / sizeof(study_children_from_algebra[0]);
 }
 
-
-const KLikhosherstova::MenuItem KLikhosherstova::STUDY_DIFF = {
-    "1 - Хочу изучить дифференциальное исчисление!", KLikhosherstova::study_diff, &KLikhosherstova::STUDY_MATHAN
+const KLikhosherstova::MenuItem KLikhosherstova::MATHAN_DIFF = {
+    "1 - РҐРѕС‡Сѓ РёР·СѓС‡РёС‚СЊ РґРёС„С„РµСЂРµРЅС†РёР°Р»СЊРЅРѕРµ РёСЃС‡РёСЃР»РµРЅРёРµ!", KLikhosherstova::mathan_diff, &KLikhosherstova::STUDY_MATHAN
 };
-const KLikhosherstova::MenuItem KLikhosherstova::STUDY_INT = {
-    "2 - Хочу изучить интегральное исчисление!", KLikhosherstova::study_int, &KLikhosherstova::STUDY_MATHAN
+const KLikhosherstova::MenuItem KLikhosherstova::MATHAN_INT = {
+    "2 - РҐРѕС‡Сѓ РёР·СѓС‡РёС‚СЊ РёРЅС‚РµРіСЂР°Р»СЊРЅРѕРµ РёСЃС‡РёСЃР»РµРЅРёРµ!", KLikhosherstova::mathan_int, &KLikhosherstova::STUDY_MATHAN
 };
-const KLikhosherstova::MenuItem KLikhosherstova::GO_BACK_FROM_MATHAN = {
-    "0 - Вернуться к выбору предметов", KLikhosherstova::go_back, &KLikhosherstova::STUDY_MATHAN
+const KLikhosherstova::MenuItem KLikhosherstova::MATHAN_GO_BACK = {
+    "0 - Р’РµСЂРЅСѓС‚СЊСЃСЏ Рє РІС‹Р±РѕСЂСѓ РїСЂРµРґРјРµС‚РѕРІ", KLikhosherstova::go_back, &KLikhosherstova::STUDY_MATHAN
 };
 
 namespace {
     const KLikhosherstova::MenuItem* const study_children_from_mathan[] = {
-        &KLikhosherstova::GO_BACK_FROM_MATHAN,
-        &KLikhosherstova::STUDY_DIFF,
-        &KLikhosherstova::STUDY_INT,
+        &KLikhosherstova::MATHAN_GO_BACK,
+        &KLikhosherstova::MATHAN_DIFF,
+        &KLikhosherstova::MATHAN_INT,
     };
     const int study_children_from_mathan_size = sizeof(study_children_from_mathan) / sizeof(study_children_from_mathan[0]);
 }
 
-
 const KLikhosherstova::MenuItem KLikhosherstova::STUDY_ALGEBRA = {
-    "1 - Хочу изучать алгебру!", KLikhosherstova::show_menu, &KLikhosherstova::STUDY, study_children_from_algebra, study_children_from_algebra_size
+    "1 - РҐРѕС‡Сѓ РёР·СѓС‡Р°С‚СЊ Р°Р»РіРµР±СЂСѓ!", KLikhosherstova::show_menu, &KLikhosherstova::STUDY, study_children_from_algebra, study_children_from_algebra_size
 };
 
 const KLikhosherstova::MenuItem KLikhosherstova::STUDY_MATHAN = {
-    "2 - Хочу изучать математический анализ!", KLikhosherstova::show_menu, &KLikhosherstova::STUDY, study_children_from_mathan, study_children_from_mathan_size
+    "2 - РҐРѕС‡Сѓ РёР·СѓС‡Р°С‚СЊ РјР°С‚РµРјР°С‚РёС‡РµСЃРєРёР№ Р°РЅР°Р»РёР·!", KLikhosherstova::show_menu, &KLikhosherstova::STUDY, study_children_from_mathan, study_children_from_mathan_size
 };
 const KLikhosherstova::MenuItem KLikhosherstova::GO_BACK = {
-    "0 - Выйти в главное меню", KLikhosherstova::go_back, &KLikhosherstova::STUDY
+    "0 - Р’С‹Р№С‚Рё РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ", KLikhosherstova::go_back, &KLikhosherstova::STUDY
 };
 
 namespace {
@@ -73,12 +70,11 @@ namespace {
     const int subject_size = sizeof(subject_children) / sizeof(subject_children[0]);
 }
 
-
 const KLikhosherstova::MenuItem KLikhosherstova::STUDY = {
-    "1 - Хочу учиться математике!", KLikhosherstova::show_menu, &KLikhosherstova::MAIN, subject_children, subject_size
+    "1 - РҐРѕС‡Сѓ СѓС‡РёС‚СЊСЃСЏ РјР°С‚РµРјР°С‚РёРєРµ!", KLikhosherstova::show_menu, &KLikhosherstova::MAIN, subject_children, subject_size
 };
 const KLikhosherstova::MenuItem KLikhosherstova::EXIT = {
-    "0 - Довольно математики!", KLikhosherstova::exit, &KLikhosherstova::MAIN
+    "0 - Р”РѕРІРѕР»СЊРЅРѕ РјР°С‚РµРјР°С‚РёРєРё!", KLikhosherstova::exit, &KLikhosherstova::MAIN
 };
 
 namespace {

@@ -1,9 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include "menu.hpp"
 
 namespace KLikhosherstova {
     extern const MenuItem MAIN;
+    extern const MenuItem EXIT;
 
     extern const MenuItem STUDY;
     extern const MenuItem GO_BACK;
@@ -11,15 +12,13 @@ namespace KLikhosherstova {
     extern const MenuItem STUDY_MATHAN;
     extern const MenuItem STUDY_ALGEBRA;
     
-    extern const MenuItem STUDY_INT;
-    extern const MenuItem STUDY_DIFF;
-    extern const MenuItem GO_BACK_FROM_MATHAN;
+    extern const MenuItem MATHAN_INT;
+    extern const MenuItem MATHAN_DIFF;
+    extern const MenuItem MATHAN_GO_BACK;
 
-    extern const MenuItem EXIT;
-
-    extern const MenuItem STUDY_SUMM;
-    extern const MenuItem STUDY_SUBSTRACT;
-    extern const MenuItem STUDY_MULTIPLY;
-    extern const MenuItem STUDY_DIVIDE;
-    extern const MenuItem GO_BACK_FROM_ALGEBRA;
+    extern const MenuItem ALGEBRA_SUMM;
+    extern const MenuItem ALGEBRA_SUBSTRACT;
+    extern const MenuItem ALGEBRA_MULTIPLY;
+    extern const MenuItem ALGEBRA_DIVIDE;
+    extern const MenuItem ALGEBRA_GO_BACK;
 }
