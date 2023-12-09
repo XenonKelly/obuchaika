@@ -9,7 +9,16 @@
 // в анонимном namespace. Тогда при объединении линкером всех имён в один файл 
 // не будет конфликта. И располагаем их по алфавиту.
 namespace {
+    int calculate_divide(const int a, const int b);
+    int calculate_multiply(const int a, const int b);
+    int calculate_summ(const int a, const int b);
+    int calculate_substract(const int a, const int b);
     const KLikhosherstova::MenuItem* choose_continuation(const KLikhosherstova::MenuItem* option);
+    const KLikhosherstova::MenuItem* execute_operation(
+        const KLikhosherstova::MenuItem* current,
+        const char *const operation,
+        int (*calculate)(const int a, const int b)
+    );
     int get_random_number();
 }
 
@@ -49,55 +58,19 @@ const KLikhosherstova::MenuItem* KLikhosherstova::study_mathan(const MenuItem* c
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::algebra_summ(const MenuItem* current) {
-    int summ;
-    int a = get_random_number();
-    int b = get_random_number();
-    std::cout << "Сколько будет " << a << " + " << b << " = ";
-    std::cin >> summ;
-    while (summ != (a + b)) {
-        std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
-        std::cin >> summ;
-    } 
-    return choose_continuation(current);
+    return execute_operation(current, " + ", calculate_summ);
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::algebra_substract(const MenuItem* current) {
-    int difference;
-    int a = get_random_number();
-    int b = get_random_number();
-    std::cout << "Сколько будет " << a << " - " << b << " = ";
-    std::cin >> difference;
-    while (difference != (a - b)) {
-        std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
-        std::cin >> difference;
-    }
-    return choose_continuation(current);  
+    return execute_operation(current, " - ", calculate_substract);
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::algebra_multiply(const MenuItem* current) {
-    int product;
-    int a = get_random_number();
-    int b = get_random_number();
-    std::cout << "Сколько будет " << a << " * " << b << " = ";
-    std::cin >> product;
-    while (product != (a * b)) {
-        std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
-        std::cin >> product;
-    }
-    return choose_continuation(current);
+    return execute_operation(current, " * ", calculate_multiply);
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::algebra_divide(const MenuItem* current) {
-    int quotient;
-    int a = get_random_number();
-    int b = get_random_number();
-    std::cout << "Сколько будет " << a << " : " << b << " = ";
-    std::cin >> quotient;
-    while (quotient != (a / b)) {
-        std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
-        std::cin >> quotient;
-    }
-    return choose_continuation(current);
+    return execute_operation(current, " / ", calculate_divide);
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::mathan_diff(const MenuItem* current) {
@@ -109,6 +82,22 @@ const KLikhosherstova::MenuItem* KLikhosherstova::mathan_int(const MenuItem* cur
 }
 
 namespace {
+    int calculate_divide(const int a, const int b) {
+        return a / b;
+    }
+
+    int calculate_multiply(const int a, const int b) {
+        return a * b;
+    }
+
+    int calculate_summ(const int a, const int b) {
+        return a + b;
+    }
+
+    int calculate_substract(const int a, const int b) {
+        return a - b;
+    }
+
     const KLikhosherstova::MenuItem* choose_continuation(const KLikhosherstova::MenuItem* option) {
         std::cout << "Хотите продолжить?" << std::endl;
         std::cout << "1 - Хочу продолжить решать примеры этой категории" << std::endl;
@@ -124,6 +113,23 @@ namespace {
                 return option->parent;
                 break;
         }
+    }
+
+    const KLikhosherstova::MenuItem* execute_operation(
+        const KLikhosherstova::MenuItem* current,
+        const char *const operation,
+        int (*calculate)(const int a, const int b)
+    ) {
+        int quotient;
+        int a = get_random_number();
+        int b = get_random_number();
+        std::cout << "Сколько будет " << a << operation << b << " = ";
+        std::cin >> quotient;
+        while (quotient != calculate(a, b)) {
+            std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
+            std::cin >> quotient;
+        }
+        return choose_continuation(current);
     }
 
     int get_random_number() {
