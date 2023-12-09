@@ -57,13 +57,14 @@ const KLikhosherstova::MenuItem KLikhosherstova::STUDY_ALGEBRA = {
 const KLikhosherstova::MenuItem KLikhosherstova::STUDY_MATHAN = {
     "2 - Хочу изучать математический анализ!", KLikhosherstova::show_menu, &KLikhosherstova::STUDY, study_children_from_mathan, study_children_from_mathan_size
 };
-const KLikhosherstova::MenuItem KLikhosherstova::GO_BACK = {
+
+const KLikhosherstova::MenuItem KLikhosherstova::STUDY_GO_BACK = {
     "0 - Выйти в главное меню", KLikhosherstova::go_back, &KLikhosherstova::STUDY
 };
 
 namespace {
     const KLikhosherstova::MenuItem* const subject_children[] = {
-        &KLikhosherstova::GO_BACK, 
+        &KLikhosherstova::STUDY_GO_BACK, 
         &KLikhosherstova::STUDY_ALGEBRA,
         &KLikhosherstova::STUDY_MATHAN
     };

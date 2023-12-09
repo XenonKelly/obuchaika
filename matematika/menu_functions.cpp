@@ -4,8 +4,24 @@
 
 #include "menu_functions.hpp"
 
-int get_random_number();
-const KLikhosherstova::MenuItem* choose(const KLikhosherstova::MenuItem* option);
+// Вспомогательные функции для этой единицы трансляции должны быть объявлены 
+// внутри этой единицы трансляции (хедер не является единицей трансляции) 
+// в анонимном namespace. Тогда при объединении линкером всех имён в один файл 
+// не будет конфликта. И располагаем их по алфавиту.
+namespace {
+    const KLikhosherstova::MenuItem* choose_continuation(const KLikhosherstova::MenuItem* option);
+    int get_random_number();
+}
+
+// Логика расположения функций в отношении <1 функция> == <n элементов меню>
+//      - расположение вверху и по алфавиту
+const KLikhosherstova::MenuItem* KLikhosherstova::go_back(const MenuItem* current) {
+    return current->parent->parent;
+}
+
+const KLikhosherstova::MenuItem* KLikhosherstova::exit(const MenuItem* current) {
+	std::exit(0);
+}
 
 const KLikhosherstova::MenuItem* KLikhosherstova::show_menu(const MenuItem* current) {
     for (int i = 1; i < current->children_count; i++) {
@@ -21,10 +37,8 @@ const KLikhosherstova::MenuItem* KLikhosherstova::show_menu(const MenuItem* curr
     return current->children[user_input];
 }
 
-const KLikhosherstova::MenuItem* KLikhosherstova::exit(const MenuItem* current) {
-	std::exit(0);
-}
-
+// Логика расположения функций в отношении <1 функция> == <1 элемент меню>
+//      - повторяем такое же расположение как в меню
 const KLikhosherstova::MenuItem* KLikhosherstova::study_algebra(const MenuItem* current) {
     return current->parent;
 }
@@ -44,7 +58,7 @@ const KLikhosherstova::MenuItem* KLikhosherstova::algebra_summ(const MenuItem* c
         std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
         std::cin >> summ;
     } 
-    return choose(current);
+    return choose_continuation(current);
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::algebra_substract(const MenuItem* current) {
@@ -57,7 +71,7 @@ const KLikhosherstova::MenuItem* KLikhosherstova::algebra_substract(const MenuIt
         std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
         std::cin >> difference;
     }
-    return choose(current);  
+    return choose_continuation(current);  
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::algebra_multiply(const MenuItem* current) {
@@ -70,7 +84,7 @@ const KLikhosherstova::MenuItem* KLikhosherstova::algebra_multiply(const MenuIte
         std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
         std::cin >> product;
     }
-    return choose(current);
+    return choose_continuation(current);
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::algebra_divide(const MenuItem* current) {
@@ -83,44 +97,40 @@ const KLikhosherstova::MenuItem* KLikhosherstova::algebra_divide(const MenuItem*
         std::cout << "Неверный ответ! Попробуйте снова" << std::endl;
         std::cin >> quotient;
     }
-    return choose(current);
-}
-
-
-const KLikhosherstova::MenuItem* KLikhosherstova::mathan_int(const MenuItem* current) {
-    return current->parent;
+    return choose_continuation(current);
 }
 
 const KLikhosherstova::MenuItem* KLikhosherstova::mathan_diff(const MenuItem* current) {
     return current->parent;
 }
 
-const KLikhosherstova::MenuItem* KLikhosherstova::go_back(const MenuItem* current) {
-    return current->parent->parent;
+const KLikhosherstova::MenuItem* KLikhosherstova::mathan_int(const MenuItem* current) {
+    return current->parent;
 }
 
-int get_random_number()
-{
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> num(10, 50); 
+namespace {
+    const KLikhosherstova::MenuItem* choose_continuation(const KLikhosherstova::MenuItem* option) {
+        std::cout << "Хотите продолжить?" << std::endl;
+        std::cout << "1 - Хочу продолжить решать примеры этой категории" << std::endl;
+        std::cout << "0 - Выйти в меню" << std::endl;
 
-    return num(rng);
-}
+        int choice;
+        std::cin >> choice;
+        switch (choice) {
+            case 1:
+                return option;
+                break;
+            case 0:
+                return option->parent;
+                break;
+        }
+    }
 
-const KLikhosherstova::MenuItem* choose(const KLikhosherstova::MenuItem* option) {
-    std::cout << "Хотите продолжить?" << std::endl;
-    std::cout << "1 - Хочу продолжить решать примеры этой категории" << std::endl;
-    std::cout << "0 - Выйти в меню" << std::endl;
+    int get_random_number() {
+        std::random_device dev;
+        std::mt19937 rng(dev());
+        std::uniform_int_distribution<std::mt19937::result_type> num(10, 50);
 
-    int choice;
-    std::cin >> choice;
-    switch (choice) {
-    case 1:
-        return option;
-        break;
-    case 0:
-        return option->parent;
-        break;
+        return num(rng);
     }
 }
